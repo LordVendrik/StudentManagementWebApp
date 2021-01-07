@@ -1,0 +1,51 @@
+body {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #16156e;
+    background-color: #fcf8ec;
+    background-image: -webkit-linear-gradient(68deg,#d0e8f2 50%,#fcf8ec 50%);
+    background-repeat: no-repeat;
+    font-family: 'Texturina', serif;
+}
+
+#Name{
+    font-size: 10vw;
+}
+
+.alignMe b {
+    display: inline-block;
+    width: 50%;
+    position: relative;
+    padding-right: 10px; /* Ensures colon does not overlay the text */
+}
+  
+.alignMe b::after {
+    content: ":";
+    position: absolute;
+    right: 10px;
+}
+
+ul{
+      list-style-type: none;
+}
+
+
+.navbar ul li{
+    padding: 0px 50px;
+    border-right:1px solid rgb(255, 255, 255);
+}
+
+.navbar ul li:last-child{
+    padding: 0px 50px;
+    border-right:none;
+  }
+
+.navbar ul li a{
+   color: white;
+   vertical-align: middle;
+}
+
+#Logo{
+    color: #79a3b1;
+}

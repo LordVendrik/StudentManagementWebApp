@@ -1,0 +1,140 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/AddStudent.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h1>Personal Library</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active ">
+              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/studentsList">Students list</a>
+            </li>
+            <li class="nav-item">
+              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <h1>Update The Details of Student Given Below</h1>
+
+    <%if(NotAdded){%>
+      <p class="Notsubmitted">Not submitted, Please atleast FIll Name, FatherName , PhoneNumber, AlternatePhoneNumber</p>
+    <%}else{%>
+      <p class="Notsubmitted FilterEndSession">Not submitted, Please at least FIll Name, FatherName , PhoneNumber, AlternatePhoneNumber</p>
+    <%}%>
+
+    <%if(Phone){%>
+      <p class="Notsubmitted">Not submitted,Alternate Phone Number or Phone Number must be 10 digits</p>
+    <%}else{%>
+      <p class="Notsubmitted FilterEndSession">Not submitted,Alternate Phone Number or Phone Number must be 10 digits</p>
+    <%}%>
+
+    <form action="/update/<%= student._id %>" method="POST" class="form">
+
+        <div class="form-group">
+        <!-- Personal Details -->
+        <input type="text" class="form-control" placeholder="ID" name="ID" value="<%= student._id %>" readonly>
+        <input type="text" class="form-control" placeholder="Aadhar Number" name="AadharNumber" value="<%= student.AadharNumber %>">
+        <input type="text" class="form-control" placeholder="Name" name="Name" value="<%= student.Name %>">
+        <input type="text" class="form-control" placeholder="Father's Name" name="FatherName" value="<%= student.FatherName %>">
+        <input type="text" class="form-control" placeholder="Phone Number" name="PhoneNumber" value="<%= student.PhoneNumber %>" onkeypress="isInputNumber(event)">
+        <input type="text" class="form-control" placeholder="Alternate Phone Number" name="AlternatePhoneNumber" value="<%= student.AlternatePhoneNumber %>" onkeypress="isInputNumber(event)">
+        <input class="form-control" placeholder="Date of Birth" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOB" value="<%= student.DOB %>">
+
+        <hr>
+
+        <!-- Gender -->
+        <div class="Gender">
+            <strong>Gender :</strong> 
+            <%if(student.Gender == "male"){%>
+                <input type="radio" name="gender" value="male" checked>  Male
+                <input type="radio" name="gender" value="female">  Female
+                <input type="radio" name="gender" value="other">  Other
+            <%} else if(student.Gender == "female"){%>
+                <input type="radio" name="gender" value="male">  Male
+                <input type="radio" name="gender" value="female" checked>  Female
+                <input type="radio" name="gender" value="other">  Other
+            <%} else{%>
+                <input type="radio" name="gender" value="male" >  Male
+                <input type="radio" name="gender" value="female">  Female
+                <input type="radio" name="gender" value="other" checked>  Other
+            <%}%>
+        </div>
+
+        <hr>
+
+        <!-- Locker -->
+        <div class="Facility">
+          <strong>Locker :</strong> 
+          <%if(student.Locker == "Yes"){%>
+          <input type="radio" name="Locker" value="Yes" checked>  Yes
+          <input type="radio" name="Locker" value="No">  No
+          <%} else if(student.Gender == "No"){%>
+            <input type="radio" name="Locker" value="Yes">  Yes
+            <input type="radio" name="Locker" value="No" checked>  No
+          <%}%>
+        </div>
+
+        <hr>
+
+        <!-- Shift -->
+        <div class="Facility">
+          <strong>Shift :</strong> 
+          <%if(student.Shift == "morning"){%>
+          <input type="radio" name="Shift" value="morning" checked>  Morning
+          <input type="radio" name="Shift" value="evening">  Evening
+          <input type="radio" name="Shift" value="full time">  Full Time
+          <%} else if(student.Shift == "evening"){%>
+          <input type="radio" name="Shift" value="morning">  Morning
+          <input type="radio" name="Shift" value="evening" checked>  Evening
+          <input type="radio" name="Shift" value="full time">  Full Time
+          <%} else if(student.Gender == "full time"){%>
+          <input type="radio" name="Shift" value="morning">  Morning
+          <input type="radio" name="Shift" value="evening">  Evening
+          <input type="radio" name="Shift" value="full time" checked>  Full Time
+          <%}%>
+        </div>
+
+        <hr>
+
+        <!-- Reservation -->
+        <div class="Facility" id="ReSeat">
+          <strong>Reservation :</strong> 
+          <%if(student.Reservation == "Yes"){%>
+          <input type="radio" id="r1" name="Reservation" value="Yes" checked>  Yes
+          <input type="radio" id="r2" name="Reservation" value="No">  No
+          <input type="text" id="ReservedSeatNumber" class="form-control" placeholder="Reserved Seat Number" name="ReservedSeatNumber" autocomplete="off" value="<%= student.ReservationSeatNumber %>">
+          <%} else if(student.Reservation == "No"){%>
+          <input type="radio" id="r1" name="Reservation" value="Yes">  Yes
+          <input type="radio" id="r2" name="Reservation" value="No" checked>  No
+          <input type="text" id="ReservedSeatNumber" class="form-control FilterEndSession" placeholder="Reserved Seat Number" name="ReservedSeatNumber" autocomplete="off" value="<%= student.ReservationSeatNumber %>">
+          <%}%>
+        </div>
+
+        <hr>
+
+        <!-- Address Details -->
+        <input class="form-control" placeholder="Date of Join" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOJ" value="<%= student.DOJ %>">
+        <input class="form-control" placeholder="Ending of session Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="EndingDate" value="<%= student.EndingDate %>">
+        <input type="text" class="form-control" placeholder="Fees" name="Fees" value="<%= student.Fees %>">
+        <input type="text" class="form-control" placeholder="House No." name="HouseNo" value="<%= student.HouseNo %>">
+        <input type="text" class="form-control" placeholder="Street or COlony Name" name="Colony" value="<%= student.Colony %>">
+        <input type="text" class="form-control" placeholder="Landmark" name="Landmark" value="<%= student.Landmark %>">
+        <input type="text" class="form-control" placeholder="District" name="District" value="<%= student.District %>">
+        
+        <button type="submit" class="btn btn-dark btn-lg">Proceed</button>
+        </div>
+
+
+    </form>
+
+    <script src="/javascripts/AddStudentValidation.js"></script>
+<%- include('partials/footer') %>

@@ -1,0 +1,114 @@
+<%- include('partials/header') %>
+    <link rel="stylesheet" href="/css/AddStudent.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h1>Personal Library</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active ">
+              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/studentsList">Students list</a>
+            </li>
+            <li class="nav-item">
+              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <h1>Fill The Details of Students Given Below</h1>
+
+    <%if(Added){%>
+        <p class="submitted">submitted,Add New Student</p>
+    <%}else{%>
+        <p class="submitted FilterEndSession">submitted,Add New Student</p>
+    <%}%>
+
+    <%if(NotAdded){%>
+        <p class="Notsubmitted">Not submitted, Please atleast FIll Name, FatherName , PhoneNumber, AlternatePhoneNumber</p>
+    <%}else{%>
+        <p class="Notsubmitted FilterEndSession">Not submitted, Please at least FIll Name, FatherName , PhoneNumber, AlternatePhoneNumber</p>
+    <%}%>
+
+    <%if(Phone){%>
+      <p class="Notsubmitted">Not submitted,Alternate Phone Number or Phone Number must be 10 digits</p>
+    <%}else{%>
+      <p class="Notsubmitted FilterEndSession">Not submitted,Alternate Phone Number or Phone Number must be 10 digits</p>
+    <%}%>
+
+    <form action="/addStudent" method="POST" class="form">
+
+        <div class="form-group">
+        <!-- Personal Details -->
+        <input type="text" class="form-control" placeholder="Aadhar Number" name="AadharNumber" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Name *" name="Name" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Father's Name *" name="FatherName" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Phone Number *" name="PhoneNumber" onkeypress="isInputNumber(event)" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Alternate Phone Number *" name="AlternatePhoneNumber" onkeypress="isInputNumber(event)" autocomplete="off">
+        <input class="form-control" placeholder="Date of Birth" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOB">
+
+        <hr>
+
+        <!-- Gender -->
+        <div class="Gender">
+            <strong>Gender :</strong> 
+            <input type="radio" name="gender" value="male">  Male
+            <input type="radio" name="gender" value="female">  Female
+            <input type="radio" name="gender" value="other">  Other
+        </div>
+
+        <hr>
+
+        <!-- Locker -->
+        <div class="Facility">
+          <strong>Locker :</strong> 
+          <input type="radio" name="Locker" value="Yes">  Yes
+          <input type="radio" name="Locker" value="No">  No
+        </div>
+
+        <hr>
+
+        <!-- Shift -->
+        <div class="Facility">
+          <strong>Shift :</strong> 
+          <input type="radio" name="Shift" value="morning">  Morning
+          <input type="radio" name="Shift" value="evening">  Evening
+          <input type="radio" name="Shift" value="full time">  Full Time
+        </div>
+
+        <hr>
+
+        <!-- Reservation -->
+        <div class="Facility" id="ReSeat">
+          <strong>Reservation :</strong> 
+          <input type="radio" id="r1" name="Reservation" value="Yes">  Yes
+          <input type="radio" id="r2" name="Reservation" value="No">  No
+        </div>
+        <input type="text" id="ReservedSeatNumber" class="form-control FilterEndSession" placeholder="Reserved Seat Number" name="ReservedSeatNumber" autocomplete="off">
+
+        <hr>
+
+        <!-- Address Details -->
+        <input class="form-control" placeholder="Date of Join" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOJ">
+        <input class="form-control" placeholder="Ending of session Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="EndingDate">
+        <input type="text" class="form-control" placeholder="Fees" name="Fees" autocomplete="off">
+        <input type="text" class="form-control" placeholder="House No." name="HouseNo" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Street or COlony Name" name="Colony" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Landmark" name="Landmark" autocomplete="off">
+        <input type="text" class="form-control" placeholder="District" name="District" autocomplete="off">
+        
+        <button type="submit" class="btn btn-dark btn-lg">Proceed</button>
+        </div>
+
+
+    </form>
+
+    <script src="javascripts/AddStudentValidation.js"></script>
+<%- include('partials/footer') %>

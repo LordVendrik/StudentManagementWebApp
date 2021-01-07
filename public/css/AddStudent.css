@@ -1,0 +1,143 @@
+
+/* Predefined Section */
+body {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #79a3b1;
+    background-color: #fcf8ec;
+    background-image: -webkit-linear-gradient(68deg,#d0e8f2 50%,#fcf8ec 50%);
+    background-repeat: no-repeat;
+    font-family: 'Texturina', serif;
+    text-align: center;
+}
+
+th,
+td {
+  width: 110px;
+}
+
+hr{
+    height:5px;
+    border-width:5px;
+    color:gray;
+}
+
+
+/* Classes Section */
+.submitted{
+    color: green;
+    font-size: 2rem;
+}
+
+.Notsubmitted{
+    color: red;
+    font-size: 2rem;
+}
+
+.EndedSession{
+    background-color: #f56a79;
+}
+
+.NearEndedSession{
+    background-color: #fff76a;
+}
+
+.FilterEndSession{
+    display: none;
+}
+
+.table thead th{
+    vertical-align: middle;
+    overflow-wrap: break-word;
+}
+
+.Gender{
+  text-align: left;  
+}
+
+.Facility{
+    text-align: left; 
+    margin: 20px 0;
+}
+
+strong{
+    margin-right: 10px;
+}
+
+.form-control{
+    margin: 40px 0px;
+}
+
+.form{
+    width: 50%;
+    margin: auto;
+}
+
+.table{
+    table-layout: fixed;
+    overflow-wrap: break-word;
+}
+
+.Search-Box{
+    width: 70%;
+    margin: auto;
+}
+
+/* id section */
+#ChooseDropdown{
+    position: sticky; 
+    top: 4rem; 
+}
+
+.sidenav {
+    margin: 0px 20px;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+@media(min-width:1000px){
+    .sidenav {
+        margin: 0px;
+        width: calc(18% - 100px);
+        position: fixed;
+        z-index: 1;
+        top: 180px;
+        left: 50px;
+        overflow-x: hidden;
+        padding-top: 20px;
+        padding-left: 10px;
+    }
+}
+
+.main {
+    margin: 0px 20px;
+    overflow-x:auto;
+    padding: 25px 10px;
+}
+
+@media(min-width:1000px){
+    .main {
+        margin-left: 250px; /* Same as the width of the sidenav */
+        margin-right: 50px;
+        overflow-x:auto;
+        padding: 0px 10px;
+    }
+}
+
+.navbar ul li{
+    padding: 10px 50px;
+    border-right:1px solid rgb(255, 255, 255);
+}
+
+.navbar ul li:last-child{
+    padding: 10px 50px;
+    border-right:none;
+  }
+
+.navbar ul li a{
+   color: white;
+   vertical-align: middle;
+}
+  

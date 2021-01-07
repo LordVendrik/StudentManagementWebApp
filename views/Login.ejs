@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="text-center">
+    <form action="/login" class="form-signin" method="POST">
+       
+      <%if(Error == true){%>
+        <p id="Error">Incorrect UserName or Password</p>
+      <%}else{%>
+        <p id="Error" class="Hide">Incorrect UserName or Password</p>
+      <%}%>
+      
+
+        <!-- Action Details     -->
+      <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
+
+      <!-- UserName  -->
+      <label for="inputUsername" class="sr-only">Username</label>
+      <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required autofocus>
+
+      <!-- Password -->
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+
+      <!-- SubmitButton -->
+      <button class="btn btn-lg btn-dark" type="submit">Sign in</button>
+
+    </form>
+<%- include('partials/footer') %>
