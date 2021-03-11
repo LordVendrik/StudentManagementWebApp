@@ -17,7 +17,7 @@
               <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
+                <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a href="/studentsList">Students list</a>
@@ -30,33 +30,8 @@
       </nav>
 
     <div class="Search-Box form-group">
-        <input type="text" id="SearchBox" placeholder="Search by Student Name or Number" class="form-control" oninput="Search()">
+        <input type="text" id="SearchBox" placeholder="Search by Student Name" class="form-control" oninput="Search()">
     </div>
-
-    <div class="sidenav">
-        <p> <strong> Select From Drop Down Menu to change in Table</strong></p>
-
-        <select class="custom-select" id="SortBySessionType" name="SortBySessionType" onchange="SortTable()">
-            <option value="All" selected="selected">All</option>
-            <option value="SessionEnd">Session End</option>
-            <option value="SessionNotEnd">Session Not End</option>
-            <option value="Reserved">Reserved</option>
-            <option value="Morning">Morning</option>
-            <option value="Evening">Evening</option>
-            <option value="FullTime">Full Time</option>
-            <option value="Night">Night</option>
-            <option value="24Hour">24 Hour</option>
-            <option value="Other">Other</option>
-        </select>
-        <div class="OtherTimeFilter FilterEndSession" id="OtherTimeFilter">
-          <input class="from-control" type="Time" id="OtherTimeFilterFrom">
-          to
-          <input class="from-control" type="Time" id="OtherTimeFilterTo">
-          
-          <Button class="btn btn-dark" onclick="CheckTimeFromOther()">Filter</Button>
-        </div>
-    </div>
-
 
     <div class="main">
         <table class="table table-striped">
@@ -66,44 +41,28 @@
                         <th>Name</th>
                         <th>Father's Name</th>
                         <th>Phone Number</th>
-                        <th>Timing From</th>
-                        <th>Timing To</th>
                         <th>Date of Join</th>
                         <th>End Date</th>
-                        <th>Full Details</th>
-                        <th>Renew Fees</th>
-                        <th>Edit Details</th>
+                        <th>Restore Student</th>
                         <th>Delete Entry</th>
                     </tr>
             </thead>
 
             <tbody>           
                 <%for(let i=0;i<students.length;i++){ %>
-                  <%if (students[i].Reservation == "Yes"){%>
-                    <tr id="ReservedSeat">
-                  <%}else{%>
-                    <tr id="NonReservedSeat">
-                  <%}%>
+                    <tr>
                     <td><%= students[i].StudentNumber %></td>
                     <td><%= students[i].Name %></td>
                     <td><%= students[i].FatherName %></td>
                     <td><%= students[i].PhoneNumber %></td>
-                    <td><%= students[i].ShiftTimingFrom %></td>
-                    <td><%= students[i].ShiftTimingTo %></td>
                     <td><%= students[i].DOJ %></td>
                     <td><%= students[i].EndingDate %></td>
-                    <td><a href="/fullDetails/<%= students[i]._id %>">Details</a></td>
-                    <td><a href="/feesRenew/<%= students[i]._id %>" id="RenewFees<%=i%>" >Renew</a></td>
-                    <td><a href="/update/<%= students[i]._id %>">Edit</a></td>
-                    <td><a href="/delete/<%= students[i]._id %>"  onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <td><a href="/restore/<%= students[i]._id %>">Restore</a></td>
+                     <td><a href="/fulldelete/<%= students[i]._id %>"  onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                 <%}%>
             </tbody>
         </table>
-    </div>
-
-    <div>
-      <h3 id="StudentNumber"></h3>
     </div>
 
     <script src="javascripts/filter.js"></script>

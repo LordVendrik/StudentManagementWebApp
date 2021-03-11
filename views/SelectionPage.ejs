@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/SelectionPage.css">
+</head>
+<body>
+
+    <h1>FILL DETAILS TO RENEW STUDENT</h1>
+
+    <form action="/feesRenew" method="POST" class="form" onsubmit="return validateMySelectionForm();">
+        <input type="text" class="form-control" placeholder="ID" name="ID" value="<%= id %>" readonly>
+        <input type="text" class="form-control" placeholder="StudentNumber" name="StudentNumber" value="<%= stu[0].StudentNumber %>" readonly>
+        <input class="form-control" placeholder="Date of Join" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOJ" id="JoinDate" value="<%= stu[0].EndingDate %>">
+        <input class="form-control" placeholder="Ending of session Date" type="text" onfocus="SetValue(); (this.type='date')" onblur="(this.type='text')" name="EndingDate" id="EndingDate">
+        <input type="text" class="form-control" placeholder="Fees" name="Fees" autocomplete="off" id="Fees" value="<%= stu[0].Fees %>">
+        <input type="text" class="form-control" placeholder="Advance" name="Advance" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Balance" name="Balance" autocomplete="off">
+
+        <hr>
+
+        <div class="Facility">
+            <div id="SelectionBorder">
+                <strong>Payment Mode* :</strong> 
+                <input type="radio" name="PaymentMode" value="Online">  Online
+                <input type="radio" name="PaymentMode" value="Offline">  Offline
+            </div>
+        </div>
+
+        <hr>
+
+        <button type="submit" class="btn btn-dark btn-lg">Proceed</button>
+    </form>
+
+
+    <script src="/javascripts/AddStudentValidation.js"></script>
+    <script src="/javascripts/SelectionPage.js"></script>
+<%- include('partials/footer') %>

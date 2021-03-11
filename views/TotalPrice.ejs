@@ -1,0 +1,111 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/TotalPrice.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h1 id="Logo">Personal Library</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active ">
+              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active ">
+              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active ">
+              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/studentsList">Students list</a>
+            </li>
+            <li class="nav-item">
+              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <div class="form-group First">
+     <h4>Filter According to time</h4>
+        <input type="date" id="date1" class="form-control" name="FD">
+        <p>to</p>
+        <input type="date" id="date2" class="form-control" name="SD">
+        <button class="btn-dark" onclick="CalculateTotalAccToDate()">Find</button>
+        <button class="btn-dark" onclick="window.location.reload()">Reset</button>
+        <button class="btn-dark" onclick="SeprateBalance()">Seperate Balance</button>
+    </div> 
+    <hr>
+
+    <h5>You can Minus your expense here from total</h5>
+    <button class="btn btn-dark showExp" onclick="window.location.href = '/expense';">Add Expenditure</button>
+
+
+    <hr>
+    <div class="main">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                    <tr>
+                        <th>S.NO.</th>
+                        <th>Name</th>
+                        <th>Date of Join</th>
+                        <th>Fees</th>
+                        <th>Advance</th>
+                        <th>Balance</th>
+                        <th>Expense</th>
+                        <th>Payment Mode</th>
+                    </tr>
+            </thead>
+
+            <tbody>           
+                <%for(let i=0;i<s.length;i++){ %>
+                    <tr>
+                    <td><%= s[i].StudentNumber %></td>
+                    <td><%= s[i].Name %></td>
+                    <td><%= s[i].DOJ %></td>
+                    <td><%= s[i].Fees %></td>
+                    <td><%= s[i].Advance %></td>
+                    <td><%= s[i].Balance %></td>
+                    <td></td>
+                    <td><%= s[i].PaymentMode %></td>
+                    </tr>
+                <%}%>
+                <%for(let i=0;i<ex.length;i++){ %>
+                  <tr>
+                  <td></td>
+                  <td><%= ex[i].ExpenseName %></td>
+                  <td><%= ex[i].ExpenseDate %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><%= ex[i].ExpensePrice %></td>
+                  <td></td>
+                  </tr>
+              <%}%>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="3"><h4><Strong>Total</Strong></h4></td>
+                    <td><h4><Strong><%=TotalFees%></Strong></h4></td>
+                    <td><h4><Strong><%=TotalAdvance%></Strong></h4></td>
+                    <td><h4><Strong><%=TotalBalance%></Strong></h4></td>
+                    <td><h4><Strong><%=Totalex%></Strong></h4></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <Strong><p id="NumberOnline"></p></Strong>
+
+        <div class="FilterEndSession" id="subtract-expense">
+          <button class="btn btn-dark" onclick="Subtract()">Subtract Expense</button>
+          <button class="btn btn-dark" onclick="window.location.reload()">Reset</button>
+        </div>
+    </div>
+
+
+<script src="javascripts/totalPrice.js"></script>
+<%- include('partials/footer') %>

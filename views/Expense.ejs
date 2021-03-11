@@ -1,0 +1,80 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/TotalPrice.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h1 id="Logo">Personal Library</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active ">
+              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active ">
+              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active ">
+              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="/studentsList">Students list</a>
+            </li>
+            <li class="nav-item">
+              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <form action="/expense" method="POST" onsubmit="return ValidateMyForm()">
+        <input type="text" name="ExpenseDate" id="ExpenseDate"  onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Date of Expense">
+        <input type="text" name="ExpenseName" id="ExpenseName" class="form-control" placeholder="Name of Expense">
+        <input type="number" name="ExpensePrice" id="ExpensePrice" class="form-control" placeholder="Price of Expense">
+        <div class="Facility">
+          <div id="ExpenseBorder">
+            <strong>Payment Mode* :</strong> 
+            <input type="radio" name="PaymentMode" value="Online">  Online
+            <input type="radio" name="PaymentMode" value="Offline">  Offline
+          </div>
+        </div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+
+    <hr>
+    <div class="main">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                    <tr>
+                        <th>S.NO.</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Payment Mode</th>
+                        <th>Delete</th>
+                    </tr>
+            </thead>
+
+            <tbody>         
+              
+              <%for(let i=0;i<ex.length;i++){ %>
+                <tr>
+                <td><%= i+1 %></td>
+                <td><%= ex[i].ExpenseName %></td>
+                <td><%= ex[i].ExpenseDate %></td>
+                <td><%= ex[i].ExpensePrice %></td>
+                <td><%= ex[i].PaymentMode %></td>
+                <td><a href="/deleteExp/<%= ex[i]._id %>"  onclick="return confirm('Are you sure?')">Delete</a></td>
+                </tr>
+              <%}%>
+            </tbody>
+        </table>
+
+        <Strong><p id="NumberOnline"></p></Strong>
+        
+     </div>
+
+    <script src="javascripts/Expense.js"></script>
+<%- include('partials/footer') %>

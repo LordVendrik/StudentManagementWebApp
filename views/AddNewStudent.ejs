@@ -4,7 +4,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <h1>Personal Library</h1>
+        <h1 id="Logo">Personal Library</h1>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,6 +12,12 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active ">
               <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active ">
+              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active ">
+              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a href="/studentsList">Students list</a>
@@ -32,26 +38,26 @@
     <%}%>
 
     <%if(NotAdded){%>
-        <p class="Notsubmitted">Not submitted, Please atleast FIll Name, FatherName , PhoneNumber, AlternatePhoneNumber</p>
+        <p class="Notsubmitted">Not submitted, Please atleast FIll AadharNumber, Name, FatherName , PhoneNumber</p>
     <%}else{%>
-        <p class="Notsubmitted FilterEndSession">Not submitted, Please at least FIll Name, FatherName , PhoneNumber, AlternatePhoneNumber</p>
+        <p class="Notsubmitted FilterEndSession">Not submitted, Please at least FIll Name, FatherName , PhoneNumber</p>
     <%}%>
 
     <%if(Phone){%>
-      <p class="Notsubmitted">Not submitted,Alternate Phone Number or Phone Number must be 10 digits</p>
+      <p class="Notsubmitted">Not submitted,Phone Number must be 10 digits</p>
     <%}else{%>
-      <p class="Notsubmitted FilterEndSession">Not submitted,Alternate Phone Number or Phone Number must be 10 digits</p>
+      <p class="Notsubmitted FilterEndSession">Not submitted,Phone Number must be 10 digits</p>
     <%}%>
 
-    <form action="/addStudent" method="POST" class="form">
+    <form action="/addStudent" method="POST" class="form" onsubmit="return validateMyForm();">
 
         <div class="form-group">
         <!-- Personal Details -->
-        <input type="text" class="form-control" placeholder="Aadhar Number" name="AadharNumber" autocomplete="off">
-        <input type="text" class="form-control" placeholder="Name *" name="Name" autocomplete="off">
-        <input type="text" class="form-control" placeholder="Father's Name *" name="FatherName" autocomplete="off">
-        <input type="text" class="form-control" placeholder="Phone Number *" name="PhoneNumber" onkeypress="isInputNumber(event)" autocomplete="off">
-        <input type="text" class="form-control" placeholder="Alternate Phone Number *" name="AlternatePhoneNumber" onkeypress="isInputNumber(event)" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Aadhar Number" name="AadharNumber" autocomplete="off" id="AadharNumber">
+        <input type="text" class="form-control" placeholder="Name *" name="Name" autocomplete="off" id="Name">
+        <input type="text" class="form-control" placeholder="Father's Name *" name="FatherName" autocomplete="off" id="FatherName">
+        <input type="text" class="form-control" placeholder="Phone Number *" name="PhoneNumber" onkeypress="isInputNumber(event)" autocomplete="off" id="PhoneNumber">
+        <input type="text" class="form-control" placeholder="Alternate Phone Number" name="AlternatePhoneNumber" onkeypress="isInputNumber(event)" autocomplete="off">
         <input class="form-control" placeholder="Date of Birth" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOB">
 
         <hr>
@@ -77,12 +83,22 @@
 
         <!-- Shift -->
         <div class="Facility">
-          <strong>Shift :</strong> 
-          <input type="radio" name="Shift" value="morning">  Morning
-          <input type="radio" name="Shift" value="evening">  Evening
-          <input type="radio" name="Shift" value="full time">  Full Time
+          <div id="border">
+          <strong>Shift* :</strong> 
+          <input type="radio" id="MorningShift" name="Shift" value="morning">  Morning
+          <input type="radio" id="EveningShift" name="Shift" value="evening">  Evening
+          <input type="radio" id="FulltimeShift" name="Shift" value="full time">  Full Time
+          <input type="radio" id="NightShift" name="Shift" value="Night">  Night
+          <input type="radio" id="24HourShift" name="Shift" value="24Hour">  24 Hour
+          <input type="radio" id="OtherShift" name="Shift" value="Other">  Other
+          </div>
+          <div class="TimingOther FilterEndSession" id="TimingOther">
+            <input type="time" id="OtherShiftTimingFrom" name="OtherShiftTimingFrom" autocomplete="off" value="12:00">
+            <p>to</p>
+            <input type="time" id="OtherShiftTimingTo" name="OtherShiftTimingTo" autocomplete="off" value="12:00"> 
+          </div> 
         </div>
-
+        
         <hr>
 
         <!-- Reservation -->
@@ -96,9 +112,27 @@
         <hr>
 
         <!-- Address Details -->
-        <input class="form-control" placeholder="Date of Join" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOJ">
-        <input class="form-control" placeholder="Ending of session Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="EndingDate">
-        <input type="text" class="form-control" placeholder="Fees" name="Fees" autocomplete="off">
+        <input class="form-control" placeholder="Date of Join*" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="DOJ" id="JoinDate">
+        <input class="form-control" placeholder="Ending of session Date*" type="text" onfocus="SetValue(); (this.type='date')" onblur="(this.type='text')" name="EndingDate" id="EndingDate">
+        
+        <hr>
+
+        <input type="number" class="form-control" placeholder="Fees*" name="Fees" autocomplete="off" id="Fees">
+        <input type="number" class="form-control" placeholder="Advance" name="Advance" autocomplete="off">
+        <input type="number" class="form-control" placeholder="Balance" name="Balance" autocomplete="off">
+
+        <hr>
+
+        <div class="Facility">
+          <div id="border2">
+          <strong>Payment Mode* :</strong> 
+            <input type="radio" name="PaymentMode" value="Online">  Online
+            <input type="radio" name="PaymentMode" value="Offline">  Offline
+          </div>
+        </div>
+
+        <hr>
+
         <input type="text" class="form-control" placeholder="House No." name="HouseNo" autocomplete="off">
         <input type="text" class="form-control" placeholder="Street or COlony Name" name="Colony" autocomplete="off">
         <input type="text" class="form-control" placeholder="Landmark" name="Landmark" autocomplete="off">

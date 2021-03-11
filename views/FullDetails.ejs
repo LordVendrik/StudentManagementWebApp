@@ -13,6 +13,12 @@
             <li class="nav-item active ">
               <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active ">
+              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active ">
+              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item">
               <a href="/studentsList">Students list</a>
             </li>
@@ -26,19 +32,42 @@
     <h1 id="Name"><%= student.Name %></h1>
 
     <ul class="alignMe">
+        <li><b>Student Number </b> <%= student.StudentNumber %></li>
+        <hr>
         <li><b>Aadhar Number </b> <%= student.AadharNumber %></li>
+        <hr>
         <li><b>Father's Name</b> <%= student.FatherName %></li>
+        <hr>
         <li><b>Phone Number </b> <%= student.PhoneNumber %></li>
+        <hr>
         <li><b>Alternate Phone Number </b> <%= student.AlternatePhoneNumber %></li>
+        <hr>
         <li><b>Date of Birth</b> <%= student.DOB %></li>
+        <hr>
         <li><b>Gender</b> <%= student.Gender %></li>
+        <hr>
         <li><b>Locker</b> <%= student.Locker %></li>
+        <hr>
         <li><b>Shift</b> <%= student.Shift %></li>
+        <hr>
+        <li><b>Shift Timing</b> <%= student.ShiftTimingFrom %> - <%= student.ShiftTimingTo %></li>
+        <hr>
         <li><b>Reservation</b> <%= student.Reservation %></li>
+        <hr>
         <li><b>Reservation Seat Number</b> <%= student.ReservationSeatNumber %></li>
+        <hr>
         <li><b>Date of Join</b> <%= student.DOJ %></li>
+        <hr>
         <li><b>End of Session</b><%= student.EndingDate %></li>
+        <hr>
         <li><b>Fees</b><%= student.Fees %></li>
+        <hr>
+        <li><b>Advance</b><%= student.Advance %></li>
+        <hr>
+        <li><b>Balance</b><%= student.Balance %></li>
+        <hr>
+        <li><b>Payment Mode</b><%= student.PaymentMode %></li>
+        <hr>
         <li><b>Address</b> <%= student.HouseNo %>, <%= student.Colony %>, <%= student.Landmark %> , <%= student.District %></li>
     </ul>
 
