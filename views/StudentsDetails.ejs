@@ -3,60 +3,53 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <h1 id="Logo">Personal Library</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active ">
-              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="/studentsList">Students list</a>
-            </li>
-            <li class="nav-item">
-              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-    <div class="Search-Box form-group">
-        <input type="text" id="SearchBox" placeholder="Search by Student Name or Number" class="form-control" oninput="Search()">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Library</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link " href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link " href="/studentsList">Student List</a>
+        <a class="nav-item nav-link " href="/backup">Back up</a>
+        <a class="nav-item nav-link " href="/totalPrice">Fees/Expense/Balance</a>
+        <a class="nav-item nav-link " href="/textArea">Notes</a>
+        <a class="nav-item nav-link " href="/logout">Logout</a>
+      </div>
     </div>
+  </nav>
 
-    <div class="sidenav">
-        <p> <strong> Select From Drop Down Menu to change in Table</strong></p>
+      <div class="filterMenu">
+        <div class="Search-Box form-group">
+            <input type="text" id="SearchBox" placeholder="Search by Student Name or Number" class="form-control" oninput="Search()">
+        </div>
 
-        <select class="custom-select" id="SortBySessionType" name="SortBySessionType" onchange="SortTable()">
-            <option value="All" selected="selected">All</option>
-            <option value="SessionEnd">Session End</option>
-            <option value="SessionNotEnd">Session Not End</option>
-            <option value="Reserved">Reserved</option>
-            <option value="Morning">Morning</option>
-            <option value="Evening">Evening</option>
-            <option value="FullTime">Full Time</option>
-            <option value="Night">Night</option>
-            <option value="24Hour">24 Hour</option>
-            <option value="Other">Other</option>
-        </select>
-        <div class="OtherTimeFilter FilterEndSession" id="OtherTimeFilter">
-          <input class="from-control" type="Time" id="OtherTimeFilterFrom">
-          to
-          <input class="from-control" type="Time" id="OtherTimeFilterTo">
-          
-          <Button class="btn btn-dark" onclick="CheckTimeFromOther()">Filter</Button>
+        <div class="sidenav">
+            <p> <strong> Filter Students</strong></p>
+
+            <select class="custom-select" id="SortBySessionType" name="SortBySessionType" onchange="SortTable()">
+                <option value="All" selected="selected">All</option>
+                <option value="SessionEnd">Session End</option>
+                <option value="SessionNearlyEnd">Session Nearly End</option>
+                <option value="SessionNotEnd">Session Not End</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Morning">Morning</option>
+                <option value="Evening">Evening</option>
+                <option value="FullTime">Full Time</option>
+                <option value="Night">Night</option>
+                <option value="24Hour">24 Hour</option>
+                <option value="Other">Other</option>
+            </select>
+            <div class="OtherTimeFilter FilterEndSession" id="OtherTimeFilter">
+              <input class="from-control" type="Time" id="OtherTimeFilterFrom">
+              to
+              <input class="from-control" type="Time" id="OtherTimeFilterTo">
+              
+              <Button class="btn btn-dark" onclick="CheckTimeFromOther()">Filter</Button>
+            </div>
         </div>
     </div>
-
 
     <div class="main">
         <table class="table table-striped">
@@ -84,18 +77,18 @@
                   <%}else{%>
                     <tr id="NonReservedSeat">
                   <%}%>
-                    <td><%= students[i].StudentNumber %></td>
-                    <td><%= students[i].Name %></td>
-                    <td><%= students[i].FatherName %></td>
-                    <td><%= students[i].PhoneNumber %></td>
-                    <td><%= students[i].ShiftTimingFrom %></td>
-                    <td><%= students[i].ShiftTimingTo %></td>
-                    <td><%= students[i].DOJ %></td>
-                    <td><%= students[i].EndingDate %></td>
-                    <td><a href="/fullDetails/<%= students[i]._id %>">Details</a></td>
-                    <td><a href="/feesRenew/<%= students[i]._id %>" id="RenewFees<%=i%>" >Renew</a></td>
-                    <td><a href="/update/<%= students[i]._id %>">Edit</a></td>
-                    <td><a href="/delete/<%= students[i]._id %>"  onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <td><strong><%= students[i].StudentNumber %></strong></td>
+                    <td><strong><%= students[i].Name %></strong></td>
+                    <td><strong><%= students[i].FatherName %></strong></td>
+                    <td><strong><%= students[i].PhoneNumber %></strong></td>
+                    <td><strong><%= students[i].ShiftTimingFrom %></strong></td>
+                    <td><strong><%= students[i].ShiftTimingTo %></strong></td>
+                    <td><strong><%= students[i].DOJ %></strong></td>
+                    <td><strong><%= students[i].EndingDate %></strong></td>
+                    <td><strong><a href="/fullDetails/<%= students[i]._id %>">Details</a></strong></td>
+                    <td><strong><a href="/feesRenew/<%= students[i]._id %>" id="RenewFees<%=i%>" >Renew</a></strong></td>
+                    <td><strong><a href="/update/<%= students[i]._id %>">Edit</a></strong></td>
+                    <td><strong><a href="/delete/<%= students[i]._id %>"  onclick="return confirm('Are you sure?')">Delete</a></strong></td>
                     </tr>
                 <%}%>
             </tbody>

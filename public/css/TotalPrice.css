@@ -1,15 +1,10 @@
-
 /* Predefined Section */
 body {
-    height: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: #570337;
-    background-color: #fcf8ec;
-    background-image: -webkit-linear-gradient(68deg,#d0e8f2 50%,#fcf8ec 50%);
-    background-repeat: no-repeat;
-    font-family: 'Texturina', serif;
-    text-align: center;
+  height: 100%;
+  background-repeat: no-repeat;
+  color: #000000;
+  font-family: "Texturina", serif;
+  text-align: center;
 }
 
 th,
@@ -17,87 +12,139 @@ td {
   width: 110px;
 }
 
-hr{
-    height:5px;
-    border-width:5px;
-    color:gray;
+#Logo {
+  color: #000000;
+  font-size: 2vw;
+}
+
+hr {
+  height: 5px;
+  border-width: 5px;
+  color: gray;
 }
 
 /* Classes Section */
-.Facility{
-    margin-bottom: 20px;
+.Facility {
+  margin-bottom: 20px;
 }
 
-.First{
-    margin: 20px 0 0 0;
+.showExp {
+  margin: 8vh 0 0 0;
 }
 
-.showExp{
-    margin: 20px 0 0 0;
+.MngEXp {
+  display: inline-flex;
+  width: 60%;
 }
 
-.MngEXp{
-    display: inline-flex;
-    width: 60%;
+.form-control.ExpName {
+  width: 50vw;
+  margin-right: 10px;
+}
+.form-control.ExpPrice {
+  width: 20vw;
 }
 
-.form-control.ExpName{
-    width: 50vw;
-    margin-right: 10px;
-}
-.form-control.ExpPrice{
-    width: 20vw;
+.AddExp {
+  margin-top: 10px;
 }
 
-.AddExp{
-    margin-top: 10px;
+.FilterEndSession {
+  display: none;
 }
 
-.FilterEndSession{
-    display: none;
+.table thead th {
+  vertical-align: middle;
+  overflow-wrap: break-word;
 }
 
-.table thead th{
-    vertical-align: middle;
-    overflow-wrap: break-word;
+strong {
+  margin-right: 10px;
 }
 
-strong{
-    margin-right: 10px;
+.form-control {
+  margin: 40px auto;
+  width: 60vw;
 }
 
-.form-control{
-    margin: 40px auto;
-    width: 60vw;
-}
-
-
-.table{
-    table-layout: fixed;
-    overflow-wrap: break-word;
+.table {
+  table-layout: fixed;
+  overflow-wrap: break-word;
 }
 
 .main {
-    margin: 0px 20px;
-    overflow-x:auto;
-    padding: 25px 10px;
+  margin: 0px 20px;
+  overflow-x: auto;
+  padding: 25px 10px;
 }
 
-.navbar ul li{
-    padding: 10px 50px;
-    border-right:1px solid rgb(255, 255, 255);
+.navbar {
+  padding: 0;
+  background: linear-gradient(to bottom, #ffffff 0%, #757575 100%);
 }
 
-.navbar ul li:last-child{
-    padding: 10px 50px;
-    border-right:none;
-  }
-
-.navbar ul li a{
-   color: white;
-   vertical-align: middle;
+.navbar-brand {
+  font-weight: 800;
+  padding-left: 2vw;
 }
-  
-.Online{
-    background-color: 	#FFA500;
+
+nav .navbar-nav a {
+  padding-left: 3vw !important;
+  padding-right: 3vw !important;
+  color: #000000 !important;
+  font-weight: 400;
+  border-left: 1px solid #000000;
+  transition: font-size 0.5s;
+}
+nav .navbar-nav a:hover {
+  background-color: #cacaca;
+  font-size: 1.2rem;
+}
+
+.Online {
+  background-color: #ffa500;
+}
+
+#subtract-expense {
+  margin-bottom: 15px;
+}
+
+.inactiveLink {
+  pointer-events: none;
+  cursor: default;
+  color: #778899;
+}
+
+#date1 {
+  width: 15vw;
+  margin: 0 4vw 0 4vw;
+}
+
+#date2 {
+  width: 15vw;
+  margin: 0 4vw 0 4vw;
+}
+
+.FindBut {
+  margin-right: 2vw;
+}
+
+.First {
+  display: flex;
+  margin: 4vw 0 0 0;
+  justify-content: center;
+}
+
+.Timefilter {
+  width: 70%;
+}
+
+.totalpricefilters {
+  display: flex;
+  border-bottom: #000000 2px solid;
+}
+
+.expenditureAddshow {
+  width: 30%;
+  border-left: #000000 2px solid;
 }

@@ -7,6 +7,7 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const { runInNewContext } = require("vm");
 
 const app = express();
 
@@ -148,12 +149,11 @@ const Expense = mongoose.model("Expense",ExpenseSchema);
 
 
 
+const NotesSchema = new mongoose.Schema({
+    Note:String
+});
 
-
-
-
-
-
+const Notes = mongoose.model("Note",NotesSchema);
 
 
 
@@ -627,6 +627,19 @@ app.get("/totalPrice",function(req,res){
         res.redirect("/login");
     }
 });
+
+app.get("/deletePrice/:id",function(req,res){
+    var id = req.params.id;
+
+    Expeditures.deleteOne({_id:id},(err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log("deleted price");
+            res.redirect("/totalPrice");
+        }
+    });
+});
 //Total Price
 
 
@@ -980,7 +993,25 @@ app.post("/update/:id",function(req,res){
                                                                         }
                                                                     });
                                                                 }else{
-                                                                    res.redirect("/studentsList");
+                                                                    const newExp = new Expeditures({
+                                                                        StudentNumber : req.body.StudentNumber,
+                                                                        Name : req.body.Name,
+                                                                        DOJ : req.body.DOJ,
+                                                                        EndingDate : req.body.EndingDate,
+                                                                        Fees : req.body.Fees,
+                                                                        Advance : req.body.Advance,
+                                                                        Balance : req.body.Balance,
+                                                                        PaymentMode : req.body.PaymentMode
+                                                                    })
+
+                                                                    newExp.save(function(error2){
+                                                                        if(error2){
+                                                                            console.log(error2);
+                                                                        }else{
+                                                                            console.log("added new entry in expenditure");
+                                                                            res.redirect("/studentsList");
+                                                                        }
+                                                                    })
                                                                 }
                                                             }
                                                         }); 
@@ -1027,7 +1058,7 @@ app.post("/expense",function(req,res){
     if(req.isAuthenticated()){
        const ex = new Expense({
            ExpenseDate : req.body.ExpenseDate,
-           ExpenseName : req.body.ExpenseName,
+           ExpenseName : req.body.ExpenseName?req.body.ExpenseName:"Miscellaneous",
            ExpensePrice : req.body.ExpensePrice,
            PaymentMode : req.body.PaymentMode
        }); 
@@ -1060,6 +1091,86 @@ app.get("/deleteExp/:id",function(req,res){
 
 
 
+
+
+
+
+
+app.get("/textArea",(req,res)=>{
+
+    if(req.isAuthenticated()){
+
+        Notes.find(function(err,n){
+            if(err){
+                console.log(err);
+            }else{
+                if(n[0]){
+                    res.render("TextArea",{notes:n[0].Note,notesId:n[0]._id});
+                }else{
+                    res.render("TextArea",{notes:"",notesId:""});
+                }
+            }
+        });
+
+    }else{
+        res.redirect("/login");
+    }
+
+    
+})
+
+app.post("/textArea",(req,res)=>{
+
+    if(req.isAuthenticated()){
+        var n = req.body.Notes;
+        var id = req.body.ID;
+
+        Notes.find(function(err,note){
+            if(err){
+                console.log(err);
+            }else{
+                if(note[0]){
+
+                    if(id){
+                        Notes.updateOne({_id:id},{Note:n},function(err){
+                            if(err){
+                                console.log(err);
+                            }else{
+                                res.render("TextArea",{notes:n,notesId:note[0]._id});
+                            }
+                        });   
+                    }
+                
+                }else{
+                    const notes = new Notes({
+                        Note:n
+                    });
+
+                    console.log("Posted");
+                
+                    notes.save(function(error){
+                        
+                        if(error){
+                            console.log(error);
+                        }else{
+
+                            Notes.find(function(err,no){
+                                if(err){
+                                    console.log(err);
+                                }else{
+                                    res.render("TextArea",{notes:no[0].Note,notesId:no[0]._id});
+                                }
+                            });
+
+                        }
+                    }); 
+                }
+            }
+        })
+    }else{
+        res.redirect("/login");
+    }
+});
 
 
 

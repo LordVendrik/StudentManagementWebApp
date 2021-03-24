@@ -1,4 +1,3 @@
-
 /* Predefined Section */
 html,
 body {
@@ -6,10 +5,8 @@ body {
 }
 
 body {
-  color: #570337;
-  background-color: #fcf8ec;
-  background-image: -webkit-linear-gradient(58deg,#d0e8f2 50%,#fcf8ec 50%);
-  font-family: 'Texturina', serif;
+  color: #000000;
+  font-family: "Texturina", serif;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -18,7 +15,6 @@ body {
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
-
 
 /* Classes Section */
 .form-signin {
@@ -51,10 +47,10 @@ body {
   border-top-right-radius: 0;
 }
 
-#Error{
+#Error {
   color: red;
 }
 
-.Hide{
+.Hide {
   display: none;
 }

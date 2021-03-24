@@ -24,30 +24,21 @@ document.getElementById("NumberOnline").innerHTML = "Online : "+online +"  "+" O
 function ValidateMyForm(){
 
     var ExpenseDate = document.getElementById("ExpenseDate").value;
-    var ExpenseName = document.getElementById("ExpenseName").value;
     var ExpensePrice = document.getElementById("ExpensePrice").value;
     var PaymentMode = document.querySelector('input[name="PaymentMode"]:checked');
 
 
     if(PaymentMode){
         if(ExpenseDate){
-            if(ExpenseName){
                 if(ExpensePrice){
                     console.log("submitted");
                     return true;
                 }else{
                     document.getElementById("ExpensePrice").style.border = "1px solid red";
-                    document.getElementById("ExpenseName").style.border = "none";
                     document.getElementById("ExpenseDate").style.border = "none";
                     document.getElementById("ExpenseBorder").style.border = "none";
                     return false;
                 }
-            }else{
-                document.getElementById("ExpenseName").style.border = "1px solid red";
-                document.getElementById("ExpenseDate").style.border = "none";
-                document.getElementById("ExpenseBorder").style.border = "none";
-                return false;
-            }
         }else{
             document.getElementById("ExpenseDate").style.border = "1px solid red";
             document.getElementById("ExpenseBorder").style.border = "none";

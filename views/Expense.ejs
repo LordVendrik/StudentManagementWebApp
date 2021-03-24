@@ -3,31 +3,22 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <h1 id="Logo">Personal Library</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active ">
-              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="/studentsList">Students list</a>
-            </li>
-            <li class="nav-item">
-              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Library</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/studentsList">Student List</a>
+        <a class="nav-item nav-link" href="/backup">Back up</a>
+        <a class="nav-item nav-link" href="/totalPrice">Fees/Expense/Balance</a>
+        <a class="nav-item nav-link" href="/textArea">Notes</a>
+        <a class="nav-item nav-link" href="/logout">Logout</a>
+      </div>
+    </div>
+  </nav>
 
     <form action="/expense" method="POST" onsubmit="return ValidateMyForm()">
         <input type="text" name="ExpenseDate" id="ExpenseDate"  onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Date of Expense">
@@ -74,6 +65,15 @@
 
         <Strong><p id="NumberOnline"></p></Strong>
         
+        <Strong><h3>
+          <% var Total = 0 %>
+          <%for(let i=0;i<ex.length;i++){ %>
+            <% Total = Total + ex[i].ExpensePrice %> 
+          <%}%>
+
+          Total Expenditure : <%= Total %>
+        </h3></Strong>
+
      </div>
 
     <script src="javascripts/Expense.js"></script>

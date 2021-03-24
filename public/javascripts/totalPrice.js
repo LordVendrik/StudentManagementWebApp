@@ -143,3 +143,13 @@ function Subtract(){
 
     total.rows[0].cells[1].innerHTML = "<h4><Strong><strike>"+ totalPrice +"</strike></Strong></h4>" +"<h4><Strong>"+ Remainder+"</Strong></h4>";
 }
+
+
+for(var i=0;i<rowLength;i++)
+{
+    if(!table.rows[i].cells[5].textContent || table.rows[i].cells[5].textContent == 0){
+        if(table.rows[i].cells[0].textContent){
+        document.getElementById("deletePrice" + i).classList.add("inactiveLink");
+        }
+    }
+}

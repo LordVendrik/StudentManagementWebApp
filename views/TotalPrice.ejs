@@ -3,48 +3,43 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <h1 id="Logo">Personal Library</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active ">
-              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-              <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="/studentsList">Students list</a>
-            </li>
-            <li class="nav-item">
-              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Library</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/studentsList">Student List</a>
+        <a class="nav-item nav-link" href="/backup">Back up</a>
+        <a class="nav-item nav-link" href="/totalPrice">Fees/Expense/Balance</a>
+        <a class="nav-item nav-link" href="/textArea">Notes</a>
+        <a class="nav-item nav-link" href="/logout">Logout</a>
+      </div>
+    </div>
+  </nav>
 
-    <div class="form-group First">
-     <h4>Filter According to time</h4>
+  <div class="totalpricefilters">
+    
+    <div class="form-group Timefilter">
+      <h4>Filter According to time</h4>
+      <div class="First">
         <input type="date" id="date1" class="form-control" name="FD">
         <p>to</p>
         <input type="date" id="date2" class="form-control" name="SD">
-        <button class="btn-dark" onclick="CalculateTotalAccToDate()">Find</button>
+        <button class="btn-dark FindBut" onclick="CalculateTotalAccToDate()">Find</button>
         <button class="btn-dark" onclick="window.location.reload()">Reset</button>
-        <button class="btn-dark" onclick="SeprateBalance()">Seperate Balance</button>
+      </div>
     </div> 
-    <hr>
 
-    <h5>You can Minus your expense here from total</h5>
-    <button class="btn btn-dark showExp" onclick="window.location.href = '/expense';">Add Expenditure</button>
+    <div class="expenditureAddshow">
+      <h5>You can Minus your expense here from total</h5>
+      <button class="btn btn-dark showExp" onclick="window.location.href = '/expense';">Add/Show Expenditure</button>
+      <button class="btn btn-dark showExp" onclick="SeprateBalance()">Show Balance of students</button>
+    </div>
+  </div>
 
-
-    <hr>
     <div class="main">
         <table class="table table-striped">
             <thead class="thead-dark">
@@ -57,31 +52,34 @@
                         <th>Balance</th>
                         <th>Expense</th>
                         <th>Payment Mode</th>
+                        <th>Delete Entry</th>
                     </tr>
             </thead>
 
             <tbody>           
                 <%for(let i=0;i<s.length;i++){ %>
                     <tr>
-                    <td><%= s[i].StudentNumber %></td>
-                    <td><%= s[i].Name %></td>
-                    <td><%= s[i].DOJ %></td>
-                    <td><%= s[i].Fees %></td>
-                    <td><%= s[i].Advance %></td>
-                    <td><%= s[i].Balance %></td>
+                    <td><strong><%= s[i].StudentNumber %></strong></td>
+                    <td><strong><%= s[i].Name %></strong></td>
+                    <td><strong><%= s[i].DOJ %></strong></td>
+                    <td><strong><%= s[i].Fees %></strong></td>
+                    <td><strong><%= s[i].Advance %></strong></td>
+                    <td><strong><%= s[i].Balance %></strong></td>
                     <td></td>
-                    <td><%= s[i].PaymentMode %></td>
+                    <td><strong><%= s[i].PaymentMode %></strong></td>
+                    <td><strong><a href="/deletePrice/<%= s[i]._id %>" id="deletePrice<%=i%>"  onclick="return confirm('Are you sure?')">Delete</a></strong></td>
                     </tr>
                 <%}%>
                 <%for(let i=0;i<ex.length;i++){ %>
                   <tr>
                   <td></td>
-                  <td><%= ex[i].ExpenseName %></td>
-                  <td><%= ex[i].ExpenseDate %></td>
+                  <td><strong><%= ex[i].ExpenseName %></strong></td>
+                  <td><strong><%= ex[i].ExpenseDate %></strong></td>
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><%= ex[i].ExpensePrice %></td>
+                  <td><strong><%= ex[i].ExpensePrice %></strong></td>
+                  <td></td>
                   <td></td>
                   </tr>
               <%}%>

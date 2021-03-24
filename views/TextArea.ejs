@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+    <link rel="stylesheet" href="/css/AddStudent.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Library</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/studentsList">Student List</a>
+        <a class="nav-item nav-link" href="/backup">Back up</a>
+        <a class="nav-item nav-link" href="/totalPrice">Fees/Expense/Balance</a>
+        <a class="nav-item nav-link" href="/textArea">Notes</a>
+        <a class="nav-item nav-link" href="/logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <h2>Notes</h2>
+
+  <form action="/textArea" method="POST">
+    <div class="form-floating">
+        <input type="hidden" name="ID" value="<%= notesId %>">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 430px" name="Notes"><%= notes %></textarea>
+        <label for="floatingTextarea2">Notes</label>
+    </div>
+    <button type="submit" class="btn btn-dark">Save</button>
+  </form>
+<%- include('partials/footer') %>

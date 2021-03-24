@@ -12,11 +12,31 @@ var DefaultTo = 0;
 var NoOfStudents = rowLength;
 
 
+if (window.performance) {
+    var navEntries = window.performance.getEntriesByType('navigation');
+    if (navEntries.length > 0 && navEntries[0].type === 'back_forward') {
+        if(localStorage.getItem("value")){
 
+            document.getElementById("SortBySessionType").value = localStorage.getItem("value");
+            console.log(document.getElementById("SortBySessionType").value);
+            SortTable();
+        }
+    } else if (window.performance.navigation
+         && window.performance.navigation.type == window.performance.navigation.TYPE_BACK_FORWARD) {
+            if(localStorage.getItem("value")){
 
-
-
-
+                document.getElementById("SortBySessionType").value = localStorage.getItem("value");
+                console.log(document.getElementById("SortBySessionType").value);
+                SortTable();
+            }
+    } else {
+        document.getElementById("SortBySessionType").value = localStorage.getItem("value");
+        console.log(document.getElementById("SortBySessionType").value);
+        SortTable();
+    }
+} else {
+    console.log("Unfortunately, your browser doesn't support this API");
+}
 
 
 
@@ -25,7 +45,6 @@ for(var i=0; i<rowLength; i+=1){
   var row = table.rows[i];
 
    var actualdays = FindDays(row);
-   console.log(actualdays);
 
   if(actualdays < 0){                                                //if less than 0 then must renew color red
       row.cells[7].className = "EndedSession";
@@ -69,11 +88,13 @@ document.getElementById("StudentNumber").textContent = "Total No. of Students ar
 function SortTable(){
     var e = document.getElementById("SortBySessionType");
 
+    localStorage.setItem("value",e.value);
+
     if(e.value == "SessionEnd"){
 
         document.getElementById("OtherTimeFilter").classList.add("FilterEndSession");  
         NoOfStudents = 0;
-
+        
         for(var i=0; i<rowLength; i+=1){                                                   //Looping thorugh rows in the Table variable given above
             var row = table.rows[i];
           
@@ -83,6 +104,23 @@ function SortTable(){
                 row.className = "FilterEndSession";                          //FilterEnd Session ==== Hide Student
             }else{                                                         //unhide others                      
                 row.className = "";                                          // ""    ===== Unhide Student
+                NoOfStudents++;
+            }
+        }
+        document.getElementById("StudentNumber").textContent = "Total No. of Students are : "+NoOfStudents;
+    }//////////////////////////////        Process based on Session Nearly End from Sort Menu
+    else if(e.value == "SessionNearlyEnd"){ 
+        document.getElementById("OtherTimeFilter").classList.add("FilterEndSession");           
+        NoOfStudents = 0;                    
+        for(var k=0; k<rowLength; k+=1){
+            var row3 = table.rows[k];
+
+            var actualdays3 = FindDays(row3);
+ 
+            if(actualdays3 > 5 || actualdays3 < 0){                                       
+                row3.className = "FilterEndSession";                      //FilterEnd Session ==== Hide Student
+            }else{                                                      
+                row3.className = "";                                     // ""    ===== Unhide Student
                 NoOfStudents++;
             }
         }
@@ -454,21 +492,34 @@ function Search(){
         var SelectionBox = document.getElementById("SortBySessionType").value = "All"; 
     }
 
-    if(SearchText !== "*"){                                                //checking if search bar is null
+    console.log(SearchText);
+
+    if(SearchText){                                                //checking if search bar is null
         for(var i=0; i<rowLength; i+=1){                                     
             var row = table.rows[i];
                 
             var regex = new RegExp(SearchText,"i");                         //changing string to regex and using "i" for case insensitive
 
-            if(regex.test(row.cells[1].textContent) || regex.test(row.cells[0].textContent)){                 //if regex matches the string in table's cell then show otherwise hide         
+            if(isNaN(SearchText)){
+                if(regex.test(row.cells[1].textContent)){                 //if regex matches the string in table's cell then show otherwise hide         
                 row.className = "";
-            }else{                                                                            
-                row.className = "FilterEndSession";  
+                }else{                                                                            
+                    row.className = "FilterEndSession";  
+                }
+            }else{    
+                if(row.cells[0].textContent === SearchText){                 //if regex matches the string in table's cell then show otherwise hide         
+                    row.className = "";
+                }else{                                                                            
+                    row.className = "FilterEndSession";  
+                } 
             }
-    
+        }
+    }else{
+        for(var i=0; i<rowLength; i+=1){
+            var row = table.rows[i];
+            row.className = "";  
         }
     }
-
 }
 //Seach Bar
 

@@ -3,34 +3,25 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <h1 id="Logo">Personal Library</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active ">
-              <a href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-              <a href="/totalPrice">Total Price <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ">
-                <a href="/backup">BackUp <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="/studentsList">Students list</a>
-            </li>
-            <li class="nav-item">
-              <form action="/logout" method="GET"> <button class="btn btn-light">LogOut</button> </form>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Library</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="/addStudent">Add Student <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/studentsList">Student List</a>
+        <a class="nav-item nav-link" href="/backup">Back up</a>
+        <a class="nav-item nav-link" href="/totalPrice">Fees/Expense/Balance</a>
+        <a class="nav-item nav-link" href="/textArea">Notes</a>
+        <a class="nav-item nav-link" href="/logout">Logout</a>
+      </div>
+    </div>
+  </nav>
 
     <div class="Search-Box form-group">
-        <input type="text" id="SearchBox" placeholder="Search by Student Name" class="form-control" oninput="Search()">
+        <input type="text" id="SearchBox" placeholder="Search by Student Name or Number" class="form-control" oninput="Search()">
     </div>
 
     <div class="main">
@@ -51,18 +42,20 @@
             <tbody>           
                 <%for(let i=0;i<students.length;i++){ %>
                     <tr>
-                    <td><%= students[i].StudentNumber %></td>
-                    <td><%= students[i].Name %></td>
-                    <td><%= students[i].FatherName %></td>
-                    <td><%= students[i].PhoneNumber %></td>
-                    <td><%= students[i].DOJ %></td>
-                    <td><%= students[i].EndingDate %></td>
-                    <td><a href="/restore/<%= students[i]._id %>">Restore</a></td>
-                     <td><a href="/fulldelete/<%= students[i]._id %>"  onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <td><strong><%= students[i].StudentNumber %></strong></td>
+                    <td><strong><%= students[i].Name %></strong></td>
+                    <td><strong><%= students[i].FatherName %></strong></td>
+                    <td><strong><%= students[i].PhoneNumber %></strong></td>
+                    <td><strong><%= students[i].DOJ %></strong></td>
+                    <td><strong><%= students[i].EndingDate %></strong></td>
+                    <td><strong><a href="/restore/<%= students[i]._id %>">Restore</a></strong></td>
+                     <td><strong><a href="/fulldelete/<%= students[i]._id %>"  onclick="return confirm('Are you sure?')">Delete</a></strong></td>
                     </tr>
                 <%}%>
             </tbody>
         </table>
+
+        <p><strong>Total Students : <%= students.length %></strong></p>
     </div>
 
     <script src="javascripts/filter.js"></script>
